@@ -47,9 +47,6 @@ STATIONS = [
 cd backend
 pip install -r requirements.txt
 
-# Créer le fichier .env
-echo "ANTHROPIC_API_KEY=sk-ant-votre_cle" > .env
-
 # Lancer
 uvicorn main:app --reload --port 8000
 ```
@@ -72,10 +69,10 @@ npm run dev
 2. Sélectionner la station dans la liste (ID + Nom)
 3. Choisir le mois et l'année
 4. Déposer la photo ou le scan
-5. Cliquer **"Lancer l'extraction IA"**
+5. Cliquer **"Lancer l'extraction"**
 
 ### Étape 2 — Vérification automatique
-Claude Vision lit l'image et extrait les valeurs.
+PaddleOCR (en local, sans clé API) lit l'image et extrait les valeurs.
 
 **Règles de conversion automatique :**
 | Caractère lu | Converti en |
@@ -113,7 +110,7 @@ Le job importe automatiquement les données dans la base.
 | Méthode | Endpoint | Description |
 |---|---|---|
 | GET | `/stations` | Liste toutes les stations |
-| POST | `/upload` | Upload image + extraction IA |
+| POST | `/upload` | Upload image + extraction OCR |
 | GET | `/records/{id}/status` | Statut du traitement |
 | GET | `/records/{id}` | Données complètes |
 | PATCH | `/records/{id}/cell` | Correction manuelle d'une cellule |
